@@ -1,0 +1,25 @@
+machine:
+  environment:
+    PATH: "$PATH:~/$CIRCLE_PROJECT_REPONAME/bin"
+  python:
+    version: 2.7.9
+  services:
+    - docker
+dependencies:
+  post:
+    - docker build --rm=false -t bellkev/circle-ecs:$CIRCLE_SHA1 . | cat # workaround progress weirdness
+    - docker pull bellkev/nginx-base:stable | cat
+test:
+  override:
+    - nosetests
+    - docker run --name uwsgi bellkev/ecs-demo:$CIRCLE_SHA1:
+        background: true
+    - docker run --name nginx -p 8000:8000 --link uwsgi:uwsgi bellkev/nginx-base:stable:
+        background: true
+    - sleep 3
+    - curl http://$DOCKER_IP:8000 | grep "Hello"
+deployment:
+  prod:
+    branch: master
+    commands:
+      - ./deploy.sh

@@ -17,7 +17,7 @@ test:
     - docker run --name nginx -p 8000:8000 --link uwsgi:uwsgi bellkev/nginx-base:stable:
         background: true
     - sleep 3
-    - curl http://$DOCKER_IP:8000 | grep "Hello"
+    - curl localhost:8000 | grep "Hello"
 deployment:
   prod:
     branch: master

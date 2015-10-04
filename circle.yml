@@ -12,7 +12,7 @@ dependencies:
 test:
   override:
     - nosetests
-    - docker run --name uwsgi bellkev/ecs-demo:$CIRCLE_SHA1:
+    - docker run --name uwsgi bellkev/circle-ecs:$CIRCLE_SHA1:
         background: true
     - docker run --name nginx -p 8000:8000 --link uwsgi:uwsgi bellkev/nginx-base:stable:
         background: true

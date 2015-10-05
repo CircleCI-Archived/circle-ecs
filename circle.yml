@@ -16,6 +16,7 @@ test:
         background: true
     - docker run --name nginx -p 8000:8000 --link uwsgi:uwsgi bellkev/nginx-base:stable:
         background: true
+    - sleep 5
     - curl --retry 10 --retry-delay 5 localhost:8000 | grep "Hello"
 deployment:
   prod:

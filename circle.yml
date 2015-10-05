@@ -7,6 +7,7 @@ machine:
     - docker
 dependencies:
   post:
+    - curl -L -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static && chmod +x ~/bin/jq
     - docker build --rm=false -t bellkev/circle-ecs:$CIRCLE_SHA1 . | cat # workaround progress weirdness
     - docker pull bellkev/nginx-base:stable | cat
 test:

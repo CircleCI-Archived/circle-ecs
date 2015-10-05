@@ -1,7 +1,7 @@
 # circle-ecs
 
 This is a simple example of testing and deploying a multi-container, Dockerized service from
-CircleCI to EC2 Container Service.
+[CircleCI](https://circleci.com) to EC2 Container Service.
 
 For this example to work, the following environment variables must all be configured in the project's UI-based
 settings:

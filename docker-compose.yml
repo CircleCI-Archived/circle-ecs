@@ -1,10 +1,10 @@
-app:
+uwsgi:
   image: bellkev/circle-ecs
   links:
    - redis
 nginx:
   image: bellkev/nginx-base:stable
   links:
-    - app
+    - uwsgi
   ports:
    - 8000

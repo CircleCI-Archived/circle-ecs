@@ -1,7 +1,5 @@
 uwsgi:
-  image: bellkev/circle-ecs
-  links:
-   - redis
+  image: "bellkev/circle-ecs:${CIRCLE_SHA1}"
 nginx:
   image: bellkev/nginx-base:stable
   links:

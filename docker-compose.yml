@@ -1,0 +1,10 @@
+app:
+  image: bellkev/circle-ecs
+  links:
+   - redis
+nginx:
+  image: bellkev/nginx-base:stable
+  links:
+    - app
+  ports:
+   - 8000

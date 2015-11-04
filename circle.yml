@@ -8,13 +8,13 @@ machine:
 dependencies:
   post:
     - curl -L -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static && chmod +x ~/bin/jq
-    - sudo curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+    - curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` > ../bin/docker-compose && chmod +x ../bin/docker-compose
     - docker build --rm=false -t bellkev/circle-ecs:$CIRCLE_SHA1 . | cat # workaround progress weirdness
     - docker pull bellkev/nginx-base:stable | cat
 test:
   override:
     - nosetests
-    - docker-compose up
+    - ../bin/docker-compose up
     - sleep 5
     - curl --retry 10 --retry-delay 5 localhost:8000 | grep "Hello"
 deployment:

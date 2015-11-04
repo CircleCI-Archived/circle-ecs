@@ -14,7 +14,8 @@ dependencies:
 test:
   override:
     - nosetests
-    - ../bin/docker-compose up
+    - ../bin/docker-compose up:
+        background: true
     - sleep 5
     - curl --retry 10 --retry-delay 5 localhost:8000 | grep "Hello"
 deployment:
